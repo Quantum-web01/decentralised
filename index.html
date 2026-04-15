@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David | Blockchain & I.O.T. Architecture</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            overflow: hidden;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* The "Killer" Crop: This hides the "Built with Spline" badge */
+        .master-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        .spline-frame {
+            width: 100%;
+            height: 108%; /* Pushes the watermark off the bottom edge */
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        /* Overlaying David's specific text brief */
+        .content-overlay {
+            position: absolute;
+            top: 50%;
+            left: 8%;
+            transform: translateY(-50%);
+            z-index: 10;
+            pointer-events: none; /* Allows mouse to pass through to the 3D scene */
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #000000; /* David's Black Text rule */
+            font-size: clamp(40px, 6vw, 90px);
+            line-height: 0.9;
+            margin: 0;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+        }
+
+        p {
+            color: #000000;
+            font-size: 18px;
+            margin-top: 20px;
+            opacity: 0.8;
+            letter-spacing: 1px;
+            max-width: 400px;
+        }
+
+        /* Stealth Loader */
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 1s ease;
+        }
+
+        .loader-dot {
+            width: 10px;
+            height: 10px;
+            background: #000;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(3); opacity: 0; }
+            100% { transform: scale(1); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"><div class="loader-dot"></div></div>
+
+    <div class="master-container">
+        <div class="content-overlay">
+            <h1>Architecting<br>The New<br>Internet.</h1>
+            <p>Enterprise-grade infrastructure for the Blockchain and I.O.T. era.</p>
+        </div>
+
+        <div class="spline-frame">
+            <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+            <spline-viewer url="https://my.spline.design/interactiveaiwebsite-CYxbSXwhw48jnhP41LwrjhZp/" events-target="global"></spline-viewer>
+        </div>
+    </div>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => { document.getElementById('loader').style.display = 'none'; }, 1000);
+            }, 1500); // Gives the 3D time to warm up
+        });
+    </script>
+</body>
+</html>
