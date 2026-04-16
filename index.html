@@ -3,86 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Neuralic | Blockchain & I.O.T. Architecture</title>
+    <title>Project Preview</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000000;
-            overflow: hidden;
-        }
-
-        .master-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        spline-viewer {
-            width: 100%;
-            height: 100%;
-            display: block;
-        }
-
-        /* Hide the Built with Spline label */
-        spline-viewer::part(logo) {
-            display: none !important;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; overflow: hidden; background: #000; }
+        
         #loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000000;
+            inset: 0;
+            background: #000;
             display: flex;
             justify-content: center;
             align-items: center;
-            z-index: 999;
-            transition: opacity 1s ease;
+            z-index: 1000;
+            transition: opacity 0.6s ease;
         }
-
-        .loader-dot {
-            width: 10px;
-            height: 10px;
-            background: #fff;
+        
+        #loader.fade-out { opacity: 0; pointer-events: none; }
+        
+        .loader-ring {
+            width: 60px;
+            height: 60px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-top-color: #fff;
             border-radius: 50%;
-            animation: pulse 1.5s infinite;
+            animation: rotate 1s linear infinite;
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(3); opacity: 0; }
-            100% { transform: scale(1); opacity: 0; }
-        }
+        
+        @keyframes rotate { to { transform: rotate(360deg); } }
+        
+        spline-viewer { width: 100%; height: 100%; display: block; }
     </style>
 </head>
 <body>
-
-    <div id="loader"><div class="loader-dot"></div></div>
-
-    <div class="master-container">
-        <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.81/build/spline-viewer.js"></script>
-        <spline-viewer url="https://prod.spline.design/hJxO5kHhUvv1jNLw66H5SKEo/scene.splinecode" events-target="global"></spline-viewer>
-    </div>
-
+    <div id="loader"><div class="loader-ring"></div></div>
+    
+    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.82/build/spline-viewer.js"></script>
+    <spline-viewer id="scene" url="https://prod.spline.design/gEJQDfCHxhhxXulo/scene.splinecode"></spline-viewer>
+    
     <script>
-        function hideLoader() {
-            const loader = document.getElementById('loader');
-            loader.style.opacity = '0';
-            setTimeout(() => { loader.style.display = 'none'; }, 1000);
-        }
-
-        const viewer = document.querySelector('spline-viewer');
-        viewer.addEventListener('load', function() {
-            hideLoader();
-        });
-
-        setTimeout(hideLoader, 6000);
+        const scene = document.getElementById('scene');
+        const loader = document.getElementById('loader');
+        
+        scene.addEventListener('load', () => setTimeout(() => loader.classList.add('fade-out'), 300));
+        setTimeout(() => loader.classList.add('fade-out'), 8000);
     </script>
 </body>
 </html>
